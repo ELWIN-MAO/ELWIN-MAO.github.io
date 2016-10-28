@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ubuntu16.04 apt-get install lxde error</title>
+</head>
+<body>
+
+
+
+<h1>ubuntu16.04 apt-get install lxde error</h1>
+<h2>error 1 can't find lxde menu item on lightdm</h2>
+<p>apt-get install  lxde  and reboot can't find  lxde menu item in lightdm .</p>
+<p>apt-get install lxsession</p>
+<p>elwin@elwin-virtual-machine:~$ ls /usr/share/xsessions/</p>
+<p>openbox.desktop  ubuntu.desktop</p>
+<p>find no lxde related  *.desktop file.</p>
+<p>we find  /usr/share/xsessions/LXDE.desktop  on ubuntu 14.04 in lxsession package.
+but on ubuntu 16.04 apt-get isntall lxde does not install lxsession package.</p>
+<p>we shoule apt-get install lxsession
+reboot system
+we can find lxde menu item on lightdm, and login lxde desktop envirionment.</p>
+<h2>error 2 can't logout  lxde session by clicking on logout menu item.</h2>
+<p>after login  lxde desktop environment ,can not logout by click  on logout menu item.
+no error report , no any response.</p>
+<p>after strace the lxpanel process ,we find the error messge :</p>
+<p>"/usr/bin/lxde-logout: line 2: lxsession-logout: command not found\n"</p>
+<p>there is no lxsession-logout program, we should apt-get install lxsession-logout</p>
+<p>then we can logout lxde session.</p>
+<h2>the packages installed by lxde on ubuntu 16.04</h2>
+<p>NOTE: there are no  lxsesion and lxsession-logout package .</p>
+
+<pre><code>elwin@elwin-virtual-machine:~$ sudo apt-get install lxde
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  gnome-software-common libgtkspell3-3-0
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  alsamixergui clipit esound-common galculator gksu gnome-icon-theme gnome-icon-theme-symbolic gnome-mplayer gnome-system-tools gpicview gtk2-engines i965-va-driver javascript-common leafpad
+  liba52-0.7.4 libaacs0 libappindicator1 libass5 libaudiofile1 libavcodec-ffmpeg56 libavformat-ffmpeg56 libavutil-ffmpeg54 libbdplus0 libbluray1 libbonobo2-0 libbonobo2-common libbonoboui2-0
+  libbonoboui2-common libbs2b0 libcrystalhd3 libdca0 libdirectfb-1.2-9 libdiscid0 libdrm-amdgpu1 libdrm-common libdrm2 libdvdnav4 libdvdread4 libenca0 libesd0 libfaad2 libfltk1.1 libfm-data
+  libfm-extra4 libfm-gtk-data libfm-gtk4 libfm-modules libfm4 libgda-5.0-4 libgda-5.0-common libgif7 libgksu2-0 libglade2-0 libgme0 libgmlib1 libgmtk1 libgmtk1-data libgnome-2-0 libgnome2-0
+  libgnome2-bin libgnome2-common libgnomecanvas2-0 libgnomecanvas2-common libgnomeui-0 libgnomeui-common libgnomevfs2-0 libgnomevfs2-common libgsm1 libid3tag0 libimlib2 libindicator7
+  libjpeg-progs libjpeg9 libjs-jquery libkeybinder0 libllvm5.0 libmad0 libmenu-cache-bin libmenu-cache3 libmodplug1 libmp3lame0 libmpeg2-4 libmpg123-0 libmusicbrainz3-6v5 libobrender32
+  libobt2 liboobs-1-5 libopenal-data libopenal1 libopenjpeg5 liborbit-2-0 libpostproc-ffmpeg53 libschroedinger-1.0-0 libsdl1.2debian libshine3 libsnappy1v5 libsoxr0 libssh-gcrypt-4
+  libswresample-ffmpeg1 libswscale-ffmpeg3 libtwolame0 libuser1 libva1 libvdpau1 libvorbisidec1 libvte-common libvte9 libwnck-common libwnck22 libx264-148 libx265-79 libxdo3
+  libxmmsclient-glib1 libxmmsclient6 libxvidcore4 libzvbi-common libzvbi0 lxappearance lxappearance-obconf lxde-core lxde-icon-theme lxinput lxmenu-data lxmusic lxpanel lxpanel-data lxpolkit
+  lxrandr lxsession-data lxsession-edit lxterminal menu menu-xdg mesa-va-drivers mesa-vdpau-drivers mplayer mplayer2 p7zip-full pcmanfm system-tools-backends usermode va-driver-all
+  vdpau-driver-all xarchiver xdotool xmms2-core xmms2-plugin-alsa xmms2-plugin-id3v2 xmms2-plugin-mad xmms2-plugin-vorbis xscreensaver xscreensaver-data
+Suggested packages:
+  gecko-mediaplayer ntp gnome-control-center apache2 | lighttpd | httpd evince-gtk libbluray-bdj libbonobo2-bin firmware-crystalhd libdvdcss2 pulseaudio-esound-compat libfm-tools
+  nautilus-actions libgda-5.0-bin libgda-5.0-mysql libgda-5.0-postgres libgmlib1-dbg libgmtk1-dbg desktop-base libgnomevfs2-bin libgnomevfs2-extra gamin | fam gnome-mime-data gimp libreoffice
+  lxlauncher lxtask pidgin xfce4-power-manager lxsession xmms2-plugin-all menu-l10n mplayer-doc netselect | fping p7zip-rar libfglrx-amdxvba1 libvdpau-va-gl1 nvidia-vdpau-driver
+  nvidia-legacy-340xx-vdpau-driver arj lhasa rar rpm unar xfishtank xdaliclock xscreensaver-gl fortune qcam | streamer gdm3 | kdm-gdmcompat
+Recommended packages:
+  perl5
+The following NEW packages will be installed:
+  alsamixergui clipit esound-common galculator gksu gnome-icon-theme gnome-icon-theme-symbolic gnome-mplayer gnome-system-tools gpicview gtk2-engines i965-va-driver javascript-common leafpad
+  liba52-0.7.4 libaacs0 libappindicator1 libass5 libaudiofile1 libavcodec-ffmpeg56 libavformat-ffmpeg56 libavutil-ffmpeg54 libbdplus0 libbluray1 libbonobo2-0 libbonobo2-common libbonoboui2-0
+  libbonoboui2-common libbs2b0 libcrystalhd3 libdca0 libdirectfb-1.2-9 libdiscid0 libdrm-common libdvdnav4 libdvdread4 libenca0 libesd0 libfaad2 libfltk1.1 libfm-data libfm-extra4
+  libfm-gtk-data libfm-gtk4 libfm-modules libfm4 libgda-5.0-4 libgda-5.0-common libgif7 libgksu2-0 libglade2-0 libgme0 libgmlib1 libgmtk1 libgmtk1-data libgnome-2-0 libgnome2-0 libgnome2-bin
+  libgnome2-common libgnomecanvas2-0 libgnomecanvas2-common libgnomeui-0 libgnomeui-common libgnomevfs2-0 libgnomevfs2-common libgsm1 libid3tag0 libimlib2 libindicator7 libjpeg-progs libjpeg9
+  libjs-jquery libkeybinder0 libllvm5.0 libmad0 libmenu-cache-bin libmenu-cache3 libmodplug1 libmp3lame0 libmpeg2-4 libmpg123-0 libmusicbrainz3-6v5 libobrender32 libobt2 liboobs-1-5
+  libopenal-data libopenal1 libopenjpeg5 liborbit-2-0 libpostproc-ffmpeg53 libschroedinger-1.0-0 libsdl1.2debian libshine3 libsnappy1v5 libsoxr0 libssh-gcrypt-4 libswresample-ffmpeg1
+  libswscale-ffmpeg3 libtwolame0 libuser1 libva1 libvdpau1 libvorbisidec1 libvte-common libvte9 libwnck-common libwnck22 libx264-148 libx265-79 libxdo3 libxmmsclient-glib1 libxmmsclient6
+  libxvidcore4 libzvbi-common libzvbi0 lxappearance lxappearance-obconf lxde lxde-core lxde-icon-theme lxinput lxmenu-data lxmusic lxpanel lxpanel-data lxpolkit lxrandr lxsession-data
+  lxsession-edit lxterminal menu menu-xdg mesa-va-drivers mesa-vdpau-drivers mplayer mplayer2 p7zip-full pcmanfm system-tools-backends usermode va-driver-all vdpau-driver-all xarchiver
+  xdotool xmms2-core xmms2-plugin-alsa xmms2-plugin-id3v2 xmms2-plugin-mad xmms2-plugin-vorbis xscreensaver xscreensaver-data
+The following packages will be upgraded:
+  libdrm-amdgpu1 libdrm2
+2 upgraded, 151 newly installed, 0 to remove and 628 not upgraded.
+Need to get 59.5 MB of archives.
+After this operation, 232 MB of additional disk space will be used.
+Do you want to continue? [Y/n] 
+</code></pre>
+<h2>the packages installed by lxde on ubuntu 16.04</h2>
+<p>there are lxsesion and lxsession-logout package .</p>
+<pre><code>elwin@elwin-virtual-machine:~$ sudo apt-get install lxde
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  consolekit galculator giblib1 gksu gpicview gtk2-engines leafpad
+  libencode-locale-perl libfile-listing-perl libfm-data libfm-extra4
+  libfm-gtk-data libfm-gtk4 libfm-modules libfm4 libfont-afm-perl libgif4
+  libgksu2-0 libglade2-0 libhtml-form-perl libhtml-format-perl
+  libhtml-parser-perl libhtml-tagset-perl libhtml-tree-perl
+  libhttp-cookies-perl libhttp-daemon-perl libhttp-date-perl
+  libhttp-message-perl libhttp-negotiate-perl libid3tag0 libimlib2
+  libio-html-perl libjpeg-progs libjpeg-turbo-progs liblwp-mediatypes-perl
+  liblwp-protocol-https-perl libmad0 libmenu-cache-bin libmenu-cache3
+  libnet-http-perl libobrender29 libobt2 libpam-ck-connector libvte-common
+  libvte9 libwww-perl libwww-robotrules-perl libxmmsclient-glib1
+  libxmmsclient6 lxappearance lxde-common lxde-core lxde-icon-theme lxinput
+  lxmenu-data lxmusic lxpanel lxrandr lxsession lxsession-data lxsession-edit
+  lxsession-logout lxshortcut lxterminal menu menu-xdg obconf openbox
+  p7zip-full pcmanfm scrot xarchiver xmms2-core xmms2-plugin-alsa
+  xmms2-plugin-id3v2 xmms2-plugin-mad xmms2-plugin-vorbis xscreensaver
+  xscreensaver-data
+Suggested packages:
+  evince-gtk libfm-tools nautilus-actions libdata-dump-perl
+  libcrypt-ssleay-perl libauthen-ntlm-perl lxlauncher lxtask xmms2-plugin-all
+  menu-l10n fonts-dejavu libxml2-dev tint2 openbox-menu openbox-gnome-session
+  openbox-kde-session p7zip-rar arj lhasa rpm unar unrar-free xfishtank
+  xdaliclock xscreensaver-gl fortune qcam streamer gdm3 kdm-gdmcompat
+Recommended packages:
+  amixer
+The following NEW packages will be installed:
+  consolekit galculator giblib1 gksu gpicview gtk2-engines leafpad
+  libencode-locale-perl libfile-listing-perl libfm-data libfm-extra4
+  libfm-gtk-data libfm-gtk4 libfm-modules libfm4 libfont-afm-perl libgif4
+  libgksu2-0 libglade2-0 libhtml-form-perl libhtml-format-perl
+  libhtml-parser-perl libhtml-tagset-perl libhtml-tree-perl
+  libhttp-cookies-perl libhttp-daemon-perl libhttp-date-perl
+  libhttp-message-perl libhttp-negotiate-perl libid3tag0 libimlib2
+  libio-html-perl libjpeg-progs libjpeg-turbo-progs liblwp-mediatypes-perl
+  liblwp-protocol-https-perl libmad0 libmenu-cache-bin libmenu-cache3
+  libnet-http-perl libobrender29 libobt2 libpam-ck-connector libvte-common
+  libvte9 libwww-perl libwww-robotrules-perl libxmmsclient-glib1
+  libxmmsclient6 lxappearance lxde lxde-common lxde-core lxde-icon-theme
+  lxinput lxmenu-data lxmusic lxpanel lxrandr lxsession lxsession-data
+  lxsession-edit lxsession-logout lxshortcut lxterminal menu menu-xdg obconf
+  openbox p7zip-full pcmanfm scrot xarchiver xmms2-core xmms2-plugin-alsa
+  xmms2-plugin-id3v2 xmms2-plugin-mad xmms2-plugin-vorbis xscreensaver
+  xscreensaver-data
+0 upgraded, 80 newly installed, 0 to remove and 357 not upgraded.
+Need to get 13.3 MB of archives.
+After this operation, 46.5 MB of additional disk space will be used.
+Do you want to continue? [Y/n] 
+</code></pre>
+
+</body>
+</html>
